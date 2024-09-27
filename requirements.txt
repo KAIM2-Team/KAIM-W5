@@ -4,3 +4,7 @@ seaborn
 matplotlib
 telethon
 python-dotenv
+=======
+pandas
+matplotlib
+numpy
