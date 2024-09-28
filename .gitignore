@@ -9,8 +9,6 @@ __pycache__/
 # Virtual Environment
 .week5
 
-# Upload Data
-data/
 
 # Distribution / packaging
 .Python
