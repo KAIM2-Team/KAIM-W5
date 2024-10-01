@@ -1,3 +1,11 @@
 pandas
 matplotlib
 numpy
+datasets
+transformers
+torch
+scikit-learn
+seqeval
+shap
+lime
+
