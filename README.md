@@ -71,6 +71,15 @@ The project is organized as follows:
 │   ├── labeled_data.txt             
 ├── notebooks/                  # Jupyter notebooks for analysis, experiments, and exploration
 │   ├── KAIM-Week-5-task-2.ipynb
+│   ├── Bert-Model.ipynb
+│   ├── Distilbert-Model.ipynb
+│   ├── XLM-Roberta-Model.ipynb
+├── ner_files/                       
+│   ├── data_utils.py
+│   ├── preprocess.py
+│   ├── metrics.py
+│   ├── model_utils.py
+│   ├── main.py
 ├── scripts/                       
 │   ├── main.py
 │   ├── preprocess.py
@@ -149,6 +158,91 @@ For fine-tuning the Named Entity Recognition (NER) model, a subset of the datase
 ብር I-PRICE
 አዲስ B-LOC
 አበባ I-LOC
+```
+## Task 3, 4, 5: Named Entity Recognition (NER) using Transformer Models
+
+This project aims to train and evaluate transformer-based models for Named Entity Recognition (NER) using the Hugging Face library. The task involves token classification for product-related entities such as `Product`, `Price`, and `Location`.
+
+## Features
+
+### 1. Data Loading and Preprocessing
+The dataset follows the CoNLL format with tokens and their corresponding labels. We load the dataset using `pandas` and perform initial preprocessing such as:
+- Removing empty lines and handling malformed entries.
+- Mapping incorrect labels (e.g., `B-PROD`, `I-Price`) to standard labels (`B-Product`, `I-PRICE`).
+
+Example usage:
+```python
+file_path = "/path/to/labeled_ner_data.txt"
+conll_df = load_conll_dataset(file_path)
+train_dataset, val_dataset = split_conll_dataset(conll_df)
+```
+
+### 2. Label Mapping and Tokenization
+The NER tags are mapped into corresponding IDs:
+```python
+label_to_id = {
+    "O": 0, 
+    "B-Product": 1, 
+    "I-Product": 2, 
+    "B-PRICE": 3, 
+    "I-PRICE": 4, 
+    "B-LOC": 5, 
+    "I-LOC": 6
+}
+```
+
+Tokens are then aligned with their respective NER tags using the tokenizer for token classification models.
+
+```python
+training_dataset = train_dataset.map(lambda x: tokenize_and_align_labels(x, tokenizer), batched=True)
+```
+
+### 3. Model Training
+We fine-tune the following models using Hugging Face's `Trainer` API:
+- `xlm-roberta-base`
+- `bert-base-multilingual-cased`
+- `distilbert-base-multilingual-cased`
+
+```python
+trainer = Trainer(
+    model=model,
+    args=training_args,
+    train_dataset=training_dataset,
+    eval_dataset=evaluation_dataset,
+    tokenizer=tokenizer,
+    data_collator=data_collator,
+    compute_metrics=compute_metrics
+)
+trainer.train()
+```
+
+### 4. Evaluation and Metrics
+The models are evaluated using `seqeval` metrics to compute accuracy and generate a detailed classification report.
+
+```python
+accuracy = accuracy_score(true_labels, true_preds)
+report = classification_report(true_labels, true_preds)
+```
+
+### 5. Model Comparison
+The project includes a function to compare multiple models on the same dataset.
+
+```python
+models = ["xlm-roberta-base", "bert-base-multilingual-cased", "distilbert-base-multilingual-cased"]
+results = compare_models(models, dataset, label_list)
+```
+
+### 6. Label Distribution
+The script includes functionality to count the occurrences of each label in the training and validation datasets.
+
+```python
+label_counts = count_labels(train_dataset)
+```
+
+### 7. Save Dataset
+Preprocessed datasets can be saved for future use:
+```python
+save_dataset(conll_df, "preprocessed_conll_data.txt")
 ```
 
 ## Technical Stack
