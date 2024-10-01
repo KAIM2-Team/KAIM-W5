@@ -7,3 +7,16 @@ python-dotenv
 pandas
 matplotlib
 numpy
+
+pandas
+matplotlib
+numpy
+datasets
+transformers
+torch
+scikit-learn
+seqeval
+shap
+lime
+
+

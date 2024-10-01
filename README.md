@@ -89,9 +89,11 @@ The project is organized as follows:
 ## Tasks Breakdown
 
 ### Task 1: Data Ingestion and Data Preprocessing
+
 This task involves building a system that collects messages from multiple Ethiopian Telegram e-commerce channels, processes them, and prepares the data for entity extraction.
 
 #### Steps:
+
 1. **Identify and Connect to Relevant Telegram Channels**:
    - Develop a custom scraper to fetch real-time data from selected Telegram e-commerce channels.
    - List of relevant channels will be identified for data collection.
@@ -113,6 +115,7 @@ This task involves building a system that collects messages from multiple Ethiop
 For fine-tuning the Named Entity Recognition (NER) model, a subset of the dataset will be manually labeled in the CoNLL format. The goal is to identify entities such as **Product**, **Price**, and **Location** from the Amharic text messages.
 
 #### Steps:
+
 1. **Label Entities**:
    - Each word (token) in a message is labeled with the appropriate entity tag: 
      - `B-Product`: Beginning of a product entity (e.g., "Baby bottle").
