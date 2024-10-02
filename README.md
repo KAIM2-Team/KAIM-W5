@@ -207,9 +207,3 @@ save_dataset(conll_df, "preprocessed_conll_data.txt")
 - **LLMs**: Large Language Models to be fine-tuned for Amharic NER tasks.
 - **Database**: For storing preprocessed and labeled data.
 
-## Future Work
-
-- **LLM Fine-Tuning**: After collecting and labeling the data, the next step will involve fine-tuning large language models for Named Entity Recognition.
-- **Model Evaluation and Testing**: Testing the accuracy of the model in extracting entities from Amharic text.
-- **Integration**: Incorporating the model into EthioMart’s real-time system for data extraction and database population.
-
